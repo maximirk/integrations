@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DOCKER=1
+      - XDEBUG_MODE=develop,debug
+      - XDEBUG_CONFIG=client_host=host.docker.internal start_with_request=trigger
+    ports:
+      - "8080:80"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    volumes:
+      - .:/var/www/html
+      - ./resources/docker/config/php.ini:/usr/local/etc/php/php.ini
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - "6380:6379"
+    volumes:
+      - ./resources/docker/redis:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      retries: 3
+      timeout: 5s

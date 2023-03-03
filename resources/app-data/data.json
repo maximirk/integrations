@@ -1,0 +1,54 @@
+{
+    "control_systems": [
+        {
+            "identifier": "MoySklad",
+            "id": 1,
+            "login": "login",
+            "password": "password",
+            "apiKey": {},
+            "customFields": {
+                "organization_id": "organization_id",
+                "agent_id": "agent_id"
+            }
+        },
+        {
+            "identifier": "Wildberries",
+            "id": 2,
+            "login": "",
+            "password": "",
+            "apiKey": {
+                "key": "key",
+                "newKey": "newKey"
+            },
+            "customFields": {}
+        }
+    ],
+    "synchronization": [
+        {
+            "identifier": "StockMainMoySkladToWildberries",
+            "type": "Stock",
+            "id": 1,
+            "from": {
+                "identifier": "MoySklad",
+                "control_system_inner_id": "store_id"
+            },
+            "to": {
+                "identifier": "Wildberries",
+                "control_system_inner_id": "store_id"
+            }
+        },
+        {
+            "identifier": "ProductsMoySklad",
+            "type": "Products",
+            "id": 2,
+            "from": {
+                "identifier": "MoySklad",
+                "control_system_inner_id": ""
+            },
+            "to": {
+                "identifier": "none",
+                "control_system_inner_id": ""
+            }
+        }
+    ]
+}
